@@ -15,7 +15,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       data:[{}],
-       result: 'No result',
+       result:'No result',
        flag: false
     };
   }
@@ -31,19 +31,47 @@ componentDidMount()
     });
     }
 
+
+
 postData(){
 
-  if(this.state.result != 'No result'){
-    fetch('http://localhost:3501/list', {
-  method: 'POST',
-  headers: {
+let resultTitle = this.state.result.substring((this.state.result.search('"title":'))+10,(this.state.result.indexOf('image'))-6);
+
+ let counter = 0;
+
+for(let i=0; i<this.state.data.length; i++){
+
+if(resultTitle != 'No result' && resultTitle != this.state.data[i].title){
+  
+ 
+  if(resultTitle != this.state.data[i].title){
+    counter++
+  }
+
+     }
+ 
+   }
+  //        alert(counter);
+  // alert(this.state.data.length);
+  if(counter === this.state.data.length){
+ fetch('http://localhost:3501/list', {
+         method: 'POST',
+         headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
   body: this.state.result
-})
-  }
+           }
+        )
+        window.location.reload();
+     }
+          else{
+       alert('same');
+     }
+  
 }
+
+
 
       handleScan = data => {
     if (data) {
@@ -80,8 +108,8 @@ flagTrue(){
           onScan={this.handleScan}
           style={{ width: '70%' }}
         />
-        <p>{this.state.result}</p>
-        <button onClick={this.postData.bind(this)} >send</button>
+        <p>Title: '{this.state.result.substring((this.state.result.search('"title":'))+10,(this.state.result.indexOf('image'))-6)}'</p>
+        <button onClick={this.postData.bind(this)}>Add '{this.state.result.substring((this.state.result.search('"title":'))+10,(this.state.result.indexOf('image'))-6)}' to the list </button>
       </div>
 
                 <br/><br/>
@@ -137,9 +165,9 @@ flagTrue(){
                                 genre={item.genre}
                                  />}}/>
                                 <Link to='/Info'>
-                                <button>
+                             
                                 <img src={item.image}/>
-                                </button>
+                               
                                 </Link>
                                 </Switch>
                                 </Router>
@@ -160,7 +188,7 @@ flagTrue(){
      <div className="container">
             <h1 className="header">Movie App</h1>
 
-            <button  onClick={this.flagTrue.bind(this)}>Open Qr scanner</button>
+            <button  onClick={this.flagTrue.bind(this)}>Add movie by Qr scanner</button>
 
                 <br/><br/>
                 <br/><br/>
@@ -215,9 +243,9 @@ flagTrue(){
                                 genre={item.genre}
                                  />}}/>
                                 <Link to='/Info'>
-                                <button>
+                                
                                 <img src={item.image}/>
-                                </button>
+                               
                                 </Link>
                                 </Switch>
                                 </Router>
