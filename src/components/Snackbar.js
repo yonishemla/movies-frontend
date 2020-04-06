@@ -1,5 +1,5 @@
-import React from 'react'
-import { useSnackbar } from 'react-simple-snackbar'
+import React from 'react';
+import { useSnackbar } from 'react-simple-snackbar';
  
 export default function Snackbar(props) {
 

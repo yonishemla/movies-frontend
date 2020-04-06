@@ -9,6 +9,7 @@ import Snackbar from './components/Snackbar.js'
 
 
 import Info from './components/Info.js';
+import Splash from './components/Splash.js'
 
 import './App.css'
 
@@ -22,7 +23,8 @@ export default class App extends Component {
       data2:[{}],
        result:'No result',
        flag: false,
-       snack: 'nothing'
+       snack: 'nothing',
+           renderSplashscreen: true
     };
   }
 
@@ -30,16 +32,25 @@ export default class App extends Component {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 componentDidMount() 
 {
+
+  setTimeout(function() { 
+      this.setState({renderSplashscreen: false}) 
+  }.bind(this), 3000)
+
    fetch('http://localhost:3501/list').then((res) => res.json())
     .then((data) => {
         data.sort((a, b) => b.releaseYear - a.releaseYear);
         this.setState({data: data});
-        
+
+     
            fetch('https://cors-anywhere.herokuapp.com/http://api.androidhive.info/json/movies.json').then((res) => res.json())
     .then((data2) => {
         data2.sort((a, b) => b.releaseYear - a.releaseYear);
         this.setState({data2: data2});
         
+
+
+
 let counter = 0;
 
 if(data2.length === data.length){
@@ -68,7 +79,7 @@ else{
     alert(counter + ' rows loaded from DB');
     
 }
- alert('DB loaded');
+//  alert('DB loaded');
 
         });
     });
@@ -108,6 +119,14 @@ flagTrue(){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     render() {
+
+if(this.state.renderSplashscreen){
+  return <Splash />
+  
+}
+
+else{
+
       if(this.state.flag === true ){
         return (
 
@@ -274,6 +293,7 @@ flagTrue(){
        )
    }
 }
+    }
 }
 
 
