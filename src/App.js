@@ -4,6 +4,10 @@ import {BrowserRouter as Router , Route , Switch} from 'react-router-dom';
 import QrReader from 'react-qr-reader';
 
 
+import SnackbarProvider from 'react-simple-snackbar';
+import Snackbar from './components/Snackbar.js'
+
+
 import Info from './components/Info.js';
 
 import './App.css'
@@ -15,63 +19,63 @@ export default class App extends Component {
     super(props);
     this.state = {
       data:[{}],
+      data2:[{}],
        result:'No result',
-       flag: false
+       flag: false,
+       snack: 'nothing'
     };
   }
 
-  
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 componentDidMount() 
 {
    fetch('http://localhost:3501/list').then((res) => res.json())
     .then((data) => {
         data.sort((a, b) => b.releaseYear - a.releaseYear);
         this.setState({data: data});
-    });
-    }
+        
+           fetch('https://cors-anywhere.herokuapp.com/http://api.androidhive.info/json/movies.json').then((res) => res.json())
+    .then((data2) => {
+        data2.sort((a, b) => b.releaseYear - a.releaseYear);
+        this.setState({data2: data2});
+        
+let counter = 0;
 
+if(data2.length === data.length){
 
+for( let i=0; i<data2.length; i++){
 
-postData(){
+  if(data[i].title === data2[i].title){
+    counter++;
+       }
 
-let resultTitle = this.state.result.substring((this.state.result.search('"title":'))+10,(this.state.result.indexOf('image'))-6);
-
- let counter = 0;
-
-for(let i=0; i<this.state.data.length; i++){
-
-if(resultTitle != 'No result' && resultTitle != this.state.data[i].title){
-  
- 
-  if(resultTitle != this.state.data[i].title){
-    counter++
-  }
-
-     }
- 
-   }
-  //        alert(counter);
-  // alert(this.state.data.length);
-  if(counter === this.state.data.length){
- fetch('http://localhost:3501/list', {
+else{
+   fetch('http://localhost:3501/list', {
          method: 'POST',
          headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
-  body: this.state.result
+  body: data2[i]
            }
         )
         window.location.reload();
-     }
-          else{
-       alert('same');
-     }
-  
+          }
+
+    }
+
+    alert(counter + ' rows loaded from DB');
+    
 }
+ alert('DB loaded');
 
+        });
+    });
 
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
       handleScan = data => {
     if (data) {
@@ -80,18 +84,28 @@ if(resultTitle != 'No result' && resultTitle != this.state.data[i].title){
       })
     }
   }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   handleError = err => {
     console.error(err)
   }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 flagTrue(){
   if(this.state.flag === false){
  this.setState({flag: true});
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
  else if(this.state.flag === true){
  this.setState({flag: false});
 }
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     render() {
       if(this.state.flag === true ){
@@ -109,9 +123,11 @@ flagTrue(){
           style={{ width: '70%' }}
         />
         <p>Title: '{this.state.result.substring((this.state.result.search('"title":'))+10,(this.state.result.indexOf('image'))-6)}'</p>
-        <button onClick={this.postData.bind(this)}>Add '{this.state.result.substring((this.state.result.search('"title":'))+10,(this.state.result.indexOf('image'))-6)}' to the list </button>
+    <SnackbarProvider>
+    <Snackbar   snack={this.state.snack}
+     result={this.state.result}  data={this.state.data} />
+    </SnackbarProvider>
       </div>
-
                 <br/><br/>
                 <br/><br/>
                       <table className="table">
@@ -187,7 +203,6 @@ flagTrue(){
      
      <div className="container">
             <h1 className="header">Movie App</h1>
-
             <button  onClick={this.flagTrue.bind(this)}>Add movie by Qr scanner</button>
 
                 <br/><br/>
