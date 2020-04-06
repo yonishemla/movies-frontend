@@ -35,7 +35,7 @@ componentDidMount()
 
   setTimeout(function() { 
       this.setState({renderSplashscreen: false}) 
-  }.bind(this), 3000)
+  }.bind(this), 1800)
 
    fetch('http://localhost:3501/list').then((res) => res.json())
     .then((data) => {
@@ -76,7 +76,7 @@ else{
 
     }
 
-    alert(counter + ' rows loaded from DB');
+    // alert(counter + ' rows loaded from DB');
     
 }
 //  alert('DB loaded');

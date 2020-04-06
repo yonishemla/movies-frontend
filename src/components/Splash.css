@@ -1,0 +1,17 @@
+.splash{
+background-color:  #6a60a3;
+height: 100vw;
+width: 100vw;
+text-align: center;
+color: white;
+position: fixed;
+}
+
+.bar{
+    margin-left: 42vw;
+    margin-top: 10vw;
+}
+
+.welcome{
+    margin-top: 3vw;
+}

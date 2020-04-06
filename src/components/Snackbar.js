@@ -39,7 +39,7 @@ if(resultTitle != 'No result' && resultTitle != props.data[i].title){
      }
           else{
           
-           openSnackbar(resultTitle+' is already exist');
+           openSnackbar(resultTitle+' is already exist would ka ka ka ka');
      }
   
 }
