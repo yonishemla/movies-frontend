@@ -33,14 +33,21 @@ export default class App extends Component {
 componentDidMount() 
 {
 
-  setTimeout(function() { 
-      this.setState({renderSplashscreen: false}) 
-  }.bind(this), 1800)
+  // setTimeout(function() { 
+  //     this.setState({renderSplashscreen: false}) 
+  // }.bind(this), 1800)
+
+
 
    fetch('https://cors-anywhere.herokuapp.com/http://3.122.223.101:3501/list').then((res) => res.json())
     .then((data) => {
         data.sort((a, b) => b.releaseYear - a.releaseYear);
+          if(data !== [{}]){
+  this.setState({renderSplashscreen: false})
+}
         this.setState({data: data});
+
+
 
      
            fetch('https://cors-anywhere.herokuapp.com/http://api.androidhive.info/json/movies.json').then((res) => res.json())

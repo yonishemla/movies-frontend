@@ -20,23 +20,23 @@ export default class Splash extends Component {
 {
       setTimeout(function() { 
       this.setState({prog: 20}) 
-  }.bind(this), 600)
+  }.bind(this), 20)
 
       setTimeout(function() { 
       this.setState({prog: 40}) 
-  }.bind(this), 600)
+  }.bind(this), 20)
 
         setTimeout(function() { 
       this.setState({prog: 60}) 
-  }.bind(this), 600)
+  }.bind(this), 20)
 
         setTimeout(function() { 
       this.setState({prog: 80}) 
-  }.bind(this), 600)
+  }.bind(this), 20)
 
         setTimeout(function() { 
       this.setState({prog: 100}) 
-  }.bind(this), 600)
+  }.bind(this), 20)
 
 }
 
