@@ -26,7 +26,7 @@ if(resultTitle != 'No result' && resultTitle != props.data[i].title){
  
    }
   if(counter === props.data.length){
- fetch('http://localhost:3501/list', {
+ fetch('https://cors-anywhere.herokuapp.com/http://3.122.223.101:3501/list', {
          method: 'POST',
          headers: {
     'Accept': 'application/json',

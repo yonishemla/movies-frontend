@@ -15,3 +15,29 @@ position: fixed;
 .welcome{
     margin-top: 3vw;
 }
+
+@media screen and (max-width: 400px) {
+
+    .splash{
+        background-color:  #6a60a3;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+        color: white;
+        position: fixed;
+        }
+
+        .bar{
+            margin-left: 28vw;
+            margin-top: 20vw;
+        }
+        
+        .welcome{
+            margin-top: 3vw;
+        }
+
+        h3{
+            margin-left: 7vw;
+        }
+  
+  }

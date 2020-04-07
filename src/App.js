@@ -37,7 +37,7 @@ componentDidMount()
       this.setState({renderSplashscreen: false}) 
   }.bind(this), 1800)
 
-   fetch('http://localhost:3501/list').then((res) => res.json())
+   fetch('https://cors-anywhere.herokuapp.com/http://3.122.223.101:3501/list').then((res) => res.json())
     .then((data) => {
         data.sort((a, b) => b.releaseYear - a.releaseYear);
         this.setState({data: data});
@@ -62,7 +62,7 @@ for( let i=0; i<data2.length; i++){
        }
 
 else{
-   fetch('http://localhost:3501/list', {
+   fetch('http://3.122.223.101:3501/list', {
          method: 'POST',
          headers: {
     'Accept': 'application/json',
@@ -131,7 +131,7 @@ else{
         return (
 
             <div className="container">
-            <h1 className="header">Movie App</h1>
+            <div className="header"><h1 className = "head">Movie App</h1></div>
 
             <button onClick={this.flagTrue.bind(this)} >Close Qr scanner</button>
                 <div className="qr">

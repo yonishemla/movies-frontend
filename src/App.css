@@ -76,13 +76,13 @@ td{
   border: 0;
   padding: 50px 20px;
   margin: 0 2px;
-  border-radius: 50px;
+  /* border-radius: 50px; */
   letter-spacing: 1px;
   font-size: 15px;
   background-color: #c5c5c5a4;
   color: #fff;
   font-weight: 100;
-  box-shadow: 0.25em 0.25em 0.75em rgb(0,0,0.25);
+  /* box-shadow: 0.25em 0.25em 0.75em rgb(0,0,0.25); */
 }
 
 .header{
@@ -94,11 +94,36 @@ td{
   font-weight: bolder;
   letter-spacing: 1px;
   font-size: 25px;
-  cursor: pointer;
+
   background-color: #6a60a3;
   color: #fff;
-  text-align: center;
+  /* text-align: center; */
   /* box-shadow: 0.25em 0.25em 0.75em rgb(0,0,0.25); */
+}
+
+body {
+  background-color: black;
+}
+
+
+@media screen and (max-width: 400px) {
+
+  .header{
+    width: 150vw;
+    border: 0;
+    padding: 50px ;
+    margin: 0 2px;
+    border-radius: 2px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    font-size: 25px;
+  
+    background-color: #6a60a3;
+    color: #fff;
+    /* text-align: center; */
+    /* box-shadow: 0.25em 0.25em 0.75em rgb(0,0,0.25); */
+  }
+
 }
 
 .qr{
@@ -116,7 +141,7 @@ td{
   box-shadow: 0.25em 0.25em 0.75em rgb(0,0,0.25);
   width: 600px;
   height: 500px;
-  margin-left: 365px;
+  /* margin-left: 365px; */
 }
 
 .inqr{
@@ -134,4 +159,8 @@ h2{
 .splashimg{
   height: 100%;
   width: 100%;
+}
+
+.head{
+  margin-left: 0px;
 }
